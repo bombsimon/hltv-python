@@ -12,6 +12,11 @@ Borrowed with pride from:
 Might integrate with other Python libraries in the future, such as
 * [SocksPls/hltv-api](https://github.com/SocksPls/hltv-api)
 
+## Documentation
+
+General documentation about the Socket.IO streams can be found in
+[DOCUMENTATION.md](DOCUMENTATION.md)
+
 ## Live scoring
 
 So HLTV uses [Socket.IO](https://socket.io/) to stream the data they get from Valve and ESL (I think?). This data is
