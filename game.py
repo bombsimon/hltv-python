@@ -38,6 +38,24 @@ class Player:
         self.team = team
 
 
+class Kill:
+    def __init__(
+        self,
+        event_id=None,
+        killer=None,
+        assister=None,
+        victim=None,
+        weapon=None,
+        headshot=False,
+    ):
+        self.event_id = event_id
+        self.killer = killer
+        self.assister = assister
+        self.victim = victim
+        self.weapon = weapon
+        self.headshot = headshot
+
+
 class Team:
     def __init__(self, team_id=0, name=None, score=0, side=None, players=[]):
         self.id = team_id

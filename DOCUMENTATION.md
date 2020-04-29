@@ -28,9 +28,9 @@ The HLTV Scorebot can be reach using [Socket.IO](https://socket.io) which is a
 protocol on top of WebSockets. Simply put, you connect to a server and register
 callbacks for events on the socket. It's possible to read and write data from
 the socket and this is what HLTV does. I do not know where HLTV gets this data
-from but I read a forum post that one time a user posted abot the live scoring
-not workign and an HLTV emplyee responded with information that Valve/ESL denied
-them the data during the event.
+from but I read a forum post that one time a user posted about the live scoring
+not working and an HLTV employee responded with information that Valve/ESL
+denied them the data during the event.
 
 ## Connecting
 
@@ -43,8 +43,8 @@ encrypted and one unencrypted.
 No kind of authentication is needed.
 
 I do now know anything about rate limiting, public access or any other kind of
-limitations. One usere on the HLTV forrum told people to be careful so HLTV
-dosn't ban the source of too many connections to the server(s).
+limitations. One user on the HLTV forum told people to be careful so HLTV
+doesn't ban the source of too many connections to the server(s).
 
 When connecting, the user should emit an `readyForMatch` event with JSON data
 telling the `listId` to watch.
@@ -87,6 +87,9 @@ A player has been killed.
 #### Assist
 
 A player has made an assists. Will reference the kill event with `killEventId`.
+This means that the assist event will come after the kill event so if you want
+to present the death of a player with the kill and assist combined you must
+figure out a way to group them.
 
 ```json
 {
