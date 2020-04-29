@@ -1,4 +1,9 @@
 class Player:
+    """
+    A player represents a player in the game. The player data is populated
+    on each scoreboard event and thus updated often.
+    """
+
     def __init__(
         self,
         adr=0,
@@ -39,6 +44,11 @@ class Player:
 
 
 class Kill:
+    """
+    Kill is a result of an kill event where the full player class is
+    attached as killer, victim, assister and flaser.
+    """
+
     def __init__(
         self,
         event_id=None,
@@ -46,6 +56,7 @@ class Kill:
         assister=None,
         victim=None,
         weapon=None,
+        flasher=None,
         headshot=False,
     ):
         self.event_id = event_id
@@ -53,10 +64,15 @@ class Kill:
         self.assister = assister
         self.victim = victim
         self.weapon = weapon
+        self.flasher = flasher
         self.headshot = headshot
 
 
 class Team:
+    """
+    Team represenst one of the two teams.
+    """
+
     def __init__(self, team_id=0, name=None, score=0, side=None, players=[]):
         self.id = team_id
         self.name = name
@@ -66,6 +82,11 @@ class Team:
 
 
 class Scoreboard:
+    """
+    Scoreboard represents the current state of the scoreboard. This includes
+    all the players and all data for each players.
+    """
+
     def __init__(
         self,
         map_name=None,
@@ -80,8 +101,25 @@ class Scoreboard:
         self.terrorists = terrorists
         self.counter_terrorists = counter_terrorists
 
+    def score(self):
+        """
+        Return the score for each team as a dictionaray where the team name
+        is the key and their score is the value. This is just a convenience
+        method to be able top rint the score quickly.
+        """
+        return {
+            self.terrorists.name: self.terrorists.score,
+            self.counter_terrorists.name: self.counter_terrorists.score,
+        }
+
     def leader(self):
+        """
+        Leader returns a Team instance for the team and all it's players for
+        the current leading team. If the socre is equal None will be returned
+        """
         if self.terrorists.score > self.counter_terrorists.score:
             return self.terrorists
+        elif self.counter_terrorists.score > self.terrorists.score:
+            return self.counter_terrorists
 
-        return self.counter_terrorists
+        return None
