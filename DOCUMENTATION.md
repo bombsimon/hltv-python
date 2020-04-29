@@ -35,7 +35,7 @@ denied them the data during the event.
 ## Connecting
 
 I've found several possible ways where you can connect to the Socket.IO
-server; one encrypted and one unencrypted.
+server.
 
 - [scorebot-secure.hltv.org:443](#)
 - [cf1-scorebot.hltv.org:443](#)
@@ -62,12 +62,15 @@ socketio.emit("readyForMatch", json.dumps(ready_data))
 
 ## Events
 
-There are multiple events that might be implemented to get realtime updates from a game.
+There are multiple events that might be implemented to get realtime updates
+from a game.
 
 ### Log
 
-The log event is the event that happens on every game update during the match. The first time after a connection the log
-will be a list of all events up til this point of the match. After that only one event at a time will be sent.
+The log event is the event that happens on every game update during the
+match. The first time after a connection the log will be a list of all events
+up til this point of the match. After that only one event at a time will be
+sent.
 
 #### Kill
 
