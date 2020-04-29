@@ -179,7 +179,7 @@ class Livescore:
 
             # We skip this playback and wait for the events to come one by one.
             if len(logs) > 1:
-                self.on_event[self.EVENT_PLAYER_JOIN](logs)
+                self.on_event[self.EVENT_PLAYBACK](logs)
                 return
 
             for events in logs:
