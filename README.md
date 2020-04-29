@@ -5,12 +5,13 @@ but I might be bad at looking. The two JavaScript versions I found helped me und
 
 Borrowed with pride from:
 
-* [Nols1000/hltv-scorebot](https://github.com/Nols1000/hltv-scorebot)
-* [andrewda/hltv-livescore](https://github.com/andrewda/hltv-livescore) (wraps above linked)
-* [osebrwn/csgo-livescore](https://github.com/josebrwn/csgo-livescore) (wraps above linked)
+- [Nols1000/hltv-scorebot](https://github.com/Nols1000/hltv-scorebot)
+- [andrewda/hltv-livescore](https://github.com/andrewda/hltv-livescore) (wraps above linked)
+- [osebrwn/csgo-livescore](https://github.com/josebrwn/csgo-livescore) (wraps above linked)
 
 Might integrate with other Python libraries in the future, such as
-* [SocksPls/hltv-api](https://github.com/SocksPls/hltv-api)
+
+- [SocksPls/hltv-api](https://github.com/SocksPls/hltv-api)
 
 ## Documentation
 
@@ -19,11 +20,9 @@ General documentation about the Socket.IO streams can be found in
 
 ## Live scoring
 
-So HLTV uses [Socket.IO](https://socket.io/) to stream the data they get from Valve and ESL (I think?). This data is
-pushed on either a secure or unsecure socket.
-
-* https://scorebot-secure.hltv.org (443)
-* http://scorebot.hltv.org (80)
+So HLTV uses [Socket.IO](https://socket.io/) to stream the data they get from
+Valve and ESL (I think?). This data is pushed on a socket. See
+[DOCUMENTATION](DOCUMENTATION.md) for server information.
 
 I actually have a really (really) hard time finding any documentation at all regarding this socket. Is it official? Is
 it documented? How's it rate limited? What events are pushed, how and when, and with what data? Because of this I've

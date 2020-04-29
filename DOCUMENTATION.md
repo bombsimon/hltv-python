@@ -4,23 +4,23 @@ When building this library I couldn't find any documentation at all. I had to
 rely on existing implementations for similar tools, however they managed to get
 the information.
 
-* [The data stream ](#The-data-stream)
-* [Connecting](#Connecting)
-* [Events](#Events)
-  * [Log](#Log)
-    * [Kill](#Kill)
-    * [Assist](#Assist)
-    * [BombPlanted](#BombPlanted)
-    * [BombDefused](#BombDefused)
-    * [RoundStart](#RoundStart)
-    * [RoundEnd](#RoundEnd)
-    * [PlayerJoin](#PlayerJoin)
-    * [PlayerQuit](#PlayerQuit)
-    * [MapChange](#MapChange)
-    * [MatchStarted](#MatchStarted)
-    * [Restart](#Restart)
-    * [Suicide](#Suicide)
-  * [Scoreboard](#Scoreboard)
+- [The data stream ](#The-data-stream)
+- [Connecting](#Connecting)
+- [Events](#Events)
+  - [Log](#Log)
+    - [Kill](#Kill)
+    - [Assist](#Assist)
+    - [BombPlanted](#BombPlanted)
+    - [BombDefused](#BombDefused)
+    - [RoundStart](#RoundStart)
+    - [RoundEnd](#RoundEnd)
+    - [PlayerJoin](#PlayerJoin)
+    - [PlayerQuit](#PlayerQuit)
+    - [MapChange](#MapChange)
+    - [MatchStarted](#MatchStarted)
+    - [Restart](#Restart)
+    - [Suicide](#Suicide)
+  - [Scoreboard](#Scoreboard)
 
 ## The data stream
 
@@ -34,15 +34,18 @@ denied them the data during the event.
 
 ## Connecting
 
-I've found two possible ways where you can connect to the Socket.IO server; one
-encrypted and one unencrypted.
+I've found several possible ways where you can connect to the Socket.IO
+server; one encrypted and one unencrypted.
 
-* [scorebot-secure.hltv.org:443](#)
-* [scorebot.hltv.org:80](#)
+- [scorebot-secure.hltv.org:443](#)
+- [cf1-scorebot.hltv.org:443](#)
+- [cf2-scorebot.hltv.org:443](#)
+- [cf3-scorebot.hltv.org:443](#)
+- [scorebot.hltv.org:80](#)
 
 No kind of authentication is needed.
 
-I do now know anything about rate limiting, public access or any other kind of
+I don't know anything about rate limiting, public access or any other kind of
 limitations. One user on the HLTV forum told people to be careful so HLTV
 doesn't ban the source of too many connections to the server(s).
 
@@ -72,6 +75,8 @@ A player has been killed.
 
 ```json
 {
+  "flasherNick": "klebz",
+  "flasherSide": "TERRORIST",
   "killerName": "FNS-",
   "killerNick": "FNS",
   "killerSide": "TERRORIST",
@@ -125,16 +130,15 @@ The C4 bomb has been defused.
   "playerName": "grim--",
   "playerNick": "Grim"
 }
-
 ```
 
 #### RoundStart
 
 A new round is started.
 
-````json
+```json
 {}
-````
+```
 
 #### RoundEnd
 
@@ -151,10 +155,10 @@ A round is ended.
 
 ##### Available `winType`
 
-* `Bomb_Defused`
-* `CTs_Win`
-* `Target_Bombed`
-* `Ts_Win`
+- `Bomb_Defused`
+- `CTs_Win`
+- `Target_Bombed`
+- `Ts_Win`
 
 #### PlayerJoin
 
@@ -193,7 +197,9 @@ TODO
 The match is started.
 
 ```json
-TODO
+{
+  "map": "de_dust2"
+}
 ```
 
 #### Restart
@@ -201,7 +207,7 @@ TODO
 TODO
 
 ```json
-TODO
+{}
 ```
 
 #### Suicide
