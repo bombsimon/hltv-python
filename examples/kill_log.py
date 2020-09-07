@@ -6,6 +6,7 @@ game with the fragger, assister, flasher and victim. It will also print the
 team of each player, if it was a headshot and the weapon used.
 """
 
+import asyncio
 from scorebot import Livescore
 
 # Use a global scoreboard variable to be able to access it in any event.
@@ -73,10 +74,24 @@ def on_round_end(data):
     print("---\n")
 
 
-def main():
+async def some_other_task():
+    """
+    A task that simulates how you would run concurrently with the socket in the
+    background.
+    """
+    for _ in range(10):
+        print("running in background")
+        await asyncio.sleep(5)
+
+
+async def main():
+    """
+    Main function that will spawn a local async method and the socket in the
+    background.
+    """
     ls = Livescore()
     ls.from_url(
-        "https://www.hltv.org/matches/2340838/fnatic-vs-heretics-esl-one-road-to-rio-europe"
+        "https://www.hltv.org/matches/2343889/forze-vs-hellraisers-nine-to-five-4"
     )
 
     ls.on(ls.EVENT_CONNECT, on_connect)
@@ -84,8 +99,14 @@ def main():
     ls.on(ls.EVENT_KILL, on_kill)
     ls.on(ls.EVENT_ROUND_END, on_round_end)
 
-    ls.socket().wait()
+    socket = await ls.socket()
+
+    feed = asyncio.create_task(socket.wait())
+    other_task = asyncio.create_task(some_other_task())
+
+    await feed
+    await other_task
 
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())

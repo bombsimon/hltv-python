@@ -123,29 +123,29 @@ class Livescore:
 
         self.on_event[self.EVENT_KILL](kill)
 
-    def socket(self):
+    async def socket(self):
         """
         This method will return the full socket setup including all required
         event listeners for the HLTV Socket.IO.
         """
-        sio = socketio.Client()
+        sio = socketio.AsyncClient()
 
         @sio.event
         # pylint: disable=W0612
-        def connect():
+        async def connect():
             """
             Called when the socket is connected. Will emit an event to get
             data for desired match. Will dispatch an empty callback for
             EVENT_CONNECT.
             """
             ready_data = {"listId": self.list_id}
-            sio.emit("readyForMatch", json.dumps(ready_data))
+            await sio.emit("readyForMatch", json.dumps(ready_data))
 
             self.on_event[self.EVENT_CONNECT]()
 
         @sio.event
         # pylint: disable=W0612
-        def disconnect():
+        async def disconnect():
             """
             Called when a proper disconnect is done. Will dispatch an empty
             callback for EVENT_DISCONNECT.
@@ -154,7 +154,7 @@ class Livescore:
 
         @sio.event
         # pylint: disable=W0612
-        def log(data):
+        async def log(data):
             """
             Each event on the server dispatches a log event. When connecting
             all events this far in the match will be listed. This raw event
@@ -223,7 +223,7 @@ class Livescore:
 
         @sio.event
         # pylint: disable=W0612
-        def scoreboard(data):
+        async def scoreboard(data):
             """
             Every time the scoreboard is updated this event will be emitted.
             This includes when a player loses HP or has changes to their
@@ -300,6 +300,6 @@ class Livescore:
             self.on_event[self.EVENT_SCOREBOARD](scoreboard_data)
 
         # Connect to the scorebot URI.
-        sio.connect(self.socket_uri)
+        await sio.connect(self.socket_uri)
 
         return sio
