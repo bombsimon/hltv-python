@@ -47,7 +47,7 @@ class Livescore:
     TEAM_COUNTER_TERRORIST = "CT"
 
     def __init__(
-        self, list_id=None, socket_uri="https://scorebot-secure.hltv.org"
+        self, list_id=None, socket_uri="https://scorebot-lb.hltv.org"
     ):
         self.list_id = list_id
         self.socket_uri = socket_uri
@@ -300,6 +300,6 @@ class Livescore:
             self.on_event[self.EVENT_SCOREBOARD](scoreboard_data)
 
         # Connect to the scorebot URI.
-        await sio.connect(self.socket_uri)
+        await sio.connect(self.socket_uri, transports="websocket")
 
         return sio

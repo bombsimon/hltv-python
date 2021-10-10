@@ -37,6 +37,7 @@ denied them the data during the event.
 I've found several possible ways where you can connect to the Socket.IO
 server.
 
+- [scorebot-lb.hltv.org:443](#)
 - [scorebot-secure.hltv.org:443](#)
 - [cf1-scorebot.hltv.org:443](#)
 - [cf2-scorebot.hltv.org:443](#)
