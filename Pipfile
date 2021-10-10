@@ -4,13 +4,13 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-pylint = "*"
-flake8 = "*"
+pylint = ">=2.6.0"
+flake8 = ">=3.8.3"
 
 [packages]
-python-socketio = "*"
-requests = "*"
-aiohttp = "*"
+python-socketio = ">=5.4.0"
+requests = ">=2.26.0"
+aiohttp = ">=3.7.4"
 
 [requires]
 python_version = "3.8"
