@@ -1,0 +1,7 @@
+[MESSAGES CONTROL]
+disable=missing-module-docstring,
+        too-few-public-methods,
+        too-many-locals,
+        too-many-instance-attributes,
+        too-many-arguments,
+        dangerous-default-value
