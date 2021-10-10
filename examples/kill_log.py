@@ -6,6 +6,7 @@ game with the fragger, assister, flasher and victim. It will also print the
 team of each player, if it was a headshot and the weapon used.
 """
 
+import sys
 import asyncio
 from scorebot import Livescore
 
@@ -101,10 +102,12 @@ async def main():
     """
     kill_feed = MyKillFeed()
 
-    live_score = Livescore()
-    live_score.from_url(
-        "https://www.hltv.org/matches/2351906/movistar-riders-vs-g2-iem-fall-2021-europe"
-    )
+    try:
+        live_score = Livescore()
+        live_score.from_url(sys.argv[1])
+    except IndexError:
+        print("Pass URL to game as argument")
+        sys.exit(1)
 
     live_score.on(live_score.EVENT_CONNECT, kill_feed.on_connect)
     live_score.on(live_score.EVENT_SCOREBOARD, kill_feed.on_scoreboard)
