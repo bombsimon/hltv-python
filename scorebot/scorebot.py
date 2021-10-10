@@ -1,11 +1,15 @@
 import json
-import socketio
 
 from time import sleep
 from urllib.parse import urlparse
+
+import socketio
+
 from scorebot.game import Player, Team, Scoreboard, Kill
 
 
+# pylint: disable=W0613
+# We want to support any kind of argument passed to _noop
 def _noop(*args, **kwargs):
     pass
 
@@ -73,7 +77,9 @@ class Livescore:
             self.EVENT_SUICIDE: _noop,
         }
 
-    def on(self, event=None, f=_noop):
+    # pylint: disable=C0103
+    # The name `on` makes sense when saying `live_score.on('some_even')
+    def on(self, event=None, func=_noop):
         """
         Add a new function to an event. All events are defined as constants
         in the class and should be used to call this method. By default a
@@ -81,14 +87,16 @@ class Livescore:
         may vary but if nothing else is said the raw event log will be
         passed as the only argument.
         """
-        self.on_event[event] = f
+        self.on_event[event] = func
 
     def from_url(self, url):
         """
         Set the list ID to used based on a full URL. This way you can use a
         full URL from HLTV before opening the socket. Example:
         ls = Livescore()
-        ls.from_url("https://www.hltv.org/matches/2340838/fnatic-vs-heretics-esl-one-road-to-rio-europe")
+        ls.from_url(
+          "https://www.hltv.org/matches/2340838/fnatic-vs-heretics-esl-one-road-to-rio-europe"
+        )
         """
         parsed = urlparse(url)
         path_parts = parsed.path.split("/")
@@ -228,7 +236,7 @@ class Livescore:
             Every time the scoreboard is updated this event will be emitted.
             This includes when a player loses HP or has changes to their
             economy. Even though it's a bit inefficient the scoreboard class
-            will be completely rewritten on each event. This includs setting
+            will be completely rewritten on each event. This includes setting
             up both teams with proper Team classes and full list of all
             players with Player classes.
 

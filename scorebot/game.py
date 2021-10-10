@@ -1,3 +1,4 @@
+# pylint: disable=R0903
 class Player:
     """
     A player represents a player in the game. The player data is populated
@@ -31,7 +32,7 @@ class Player:
         self.has_defusekit = has_defusekit
         self.helmet = helmet
         self.hltv_id = hltv_id
-        self.hp = hp
+        self.hp = hp  # pylint: disable=C0103
         self.kevlar = kevlar
         self.money = money
         self.name = name
@@ -73,12 +74,12 @@ class Team:
     Team represenst one of the two teams.
     """
 
-    def __init__(self, team_id=0, name=None, score=0, side=None, players=[]):
-        self.id = team_id
+    def __init__(self, team_id=0, name=None, score=0, side=None, players=None):
+        self.id = team_id  # pylint: disable=C0103
         self.name = name
         self.score = score
         self.side = side
-        self.players = players
+        self.players = [] if players is None else players
 
 
 class Scoreboard:
@@ -119,7 +120,8 @@ class Scoreboard:
         """
         if self.terrorists.score > self.counter_terrorists.score:
             return self.terrorists
-        elif self.counter_terrorists.score > self.terrorists.score:
+
+        if self.counter_terrorists.score > self.terrorists.score:
             return self.counter_terrorists
 
         return None
