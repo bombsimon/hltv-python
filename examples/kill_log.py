@@ -20,20 +20,20 @@ class MyKillFeed:
         self.scoreboard = None
 
     @classmethod
-    def on_connect(cls):
+    async def on_connect(cls):
         """
         A simple callback to ensure we got connected.
         """
         print("connected!")
 
-    def on_scoreboard(self, scoreboard):
+    async def on_scoreboard(self, scoreboard):
         """
         Update the scoreboard on each scoreboard event.
         """
         self.scoreboard = scoreboard
 
     @classmethod
-    def on_kill(cls, data):
+    async def on_kill(cls, data):
         """
         Print a log to the kill feed for each frag.
         """
@@ -61,7 +61,7 @@ class MyKillFeed:
             )
         )
 
-    def on_round_end(self, data):
+    async def on_round_end(self, data):
         """
         Print the team who one the round nad the current score each time around
         is over.
@@ -117,7 +117,6 @@ async def main():
     socket = await live_score.socket()
 
     await socket.start_background_task(some_other_task)
-    await socket.wait()
 
 
 if __name__ == "__main__":

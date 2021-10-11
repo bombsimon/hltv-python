@@ -42,15 +42,22 @@ connecting is to parse the stream. ✌🏼
 ## Usage
 
 ```python
+import asyncio
 from scorebot import Livescore
 
-def on_kill(frag):
+async def on_kill(frag):
     print("{} killed {}".format(frag.killer.name, frag.victim.name))
 
-ls = Livescore(123456)
-ls.on(ls.EVENT_KILL, on_kill)
+async def main():
+    ls = Livescore(123456)
+    ls.on(ls.EVENT_KILL, on_kill)
 
-ls.socket().wait()
+    socket = await ls.socket()
+    await socket.wait()
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
 ```
 
 See [examples](examples/) folder for an implementation creating a kill feed.
