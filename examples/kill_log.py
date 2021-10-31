@@ -20,20 +20,20 @@ class MyKillFeed:
         self.scoreboard = None
 
     @classmethod
-    async def on_connect(cls):
+    async def on_connect(cls, **kwargs):
         """
         A simple callback to ensure we got connected.
         """
-        print("connected!")
+        print("connected to match {}!".format(kwargs["list_id"]))
 
-    async def on_scoreboard(self, scoreboard):
+    async def on_scoreboard(self, scoreboard, **kwargs):
         """
         Update the scoreboard on each scoreboard event.
         """
         self.scoreboard = scoreboard
 
     @classmethod
-    async def on_kill(cls, data):
+    async def on_kill(cls, data, **kwargs):
         """
         Print a log to the kill feed for each frag.
         """
@@ -61,9 +61,9 @@ class MyKillFeed:
             )
         )
 
-    async def on_round_end(self, data):
+    async def on_round_end(self, data, **kwargs):
         """
-        Print the team who one the round nad the current score each time around
+        Print the team who one the round and the current score each time around
         is over.
         """
         winning_team = (
@@ -85,15 +85,14 @@ class MyKillFeed:
         print("---\n")
 
 
-async def some_other_task():
+async def some_other_task(socket):
     """
     A task that simulates how you would run concurrently with the socket in the
     background.
     """
-    while True:
+    while socket.connected:
         print("running in background")
         await asyncio.sleep(5)
-
 
 async def main():
     """
@@ -116,7 +115,7 @@ async def main():
 
     socket = await live_score.socket()
 
-    await socket.start_background_task(some_other_task)
+    await socket.start_background_task(some_other_task, socket)
 
 
 if __name__ == "__main__":

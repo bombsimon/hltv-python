@@ -129,7 +129,7 @@ class Livescore:
             assist = self.last_assist.pop(kill.event_id)
             kill.assister = assist["assister"]
 
-        await self.on_event[self.EVENT_KILL](kill)
+        await self.on_event[self.EVENT_KILL](kill, list_id=self.list_id)
 
     async def socket(self):
         """
@@ -149,7 +149,7 @@ class Livescore:
             ready_data = {"listId": self.list_id}
             await sio.emit("readyForMatch", json.dumps(ready_data))
 
-            await self.on_event[self.EVENT_CONNECT]()
+            await self.on_event[self.EVENT_CONNECT](list_id=self.list_id)
 
         @sio.event
         # pylint: disable=W0612
@@ -158,7 +158,7 @@ class Livescore:
             Called when a proper disconnect is done. Will dispatch an empty
             callback for EVENT_DISCONNECT.
             """
-            await self.on_event[self.EVENT_DISCONNECT]()
+            await self.on_event[self.EVENT_DISCONNECT](list_id=self.list_id)
 
         @sio.event
         # pylint: disable=W0612
@@ -187,7 +187,7 @@ class Livescore:
 
             # We skip this playback and wait for the events to come one by one.
             if len(logs) > 1:
-                await self.on_event[self.EVENT_PLAYBACK](logs)
+                await self.on_event[self.EVENT_PLAYBACK](logs, list_id=self.list_id)
                 return
 
             for events in logs:
@@ -223,9 +223,9 @@ class Livescore:
                             ),
                         }
 
-                        await self.on_event[self.EVENT_ASSIST](event_data)
+                        await self.on_event[self.EVENT_ASSIST](event_data, list_id=self.list_id)
                     elif event in self.on_event:
-                        await self.on_event[event](event_data)
+                        await self.on_event[event](event_data, list_id=self.list_id)
                     else:
                         print("Uncaught event: {!s}".format(event))
 
@@ -305,7 +305,7 @@ class Livescore:
                 counter_terrorists=team_counter_terrorist,
             )
 
-            await self.on_event[self.EVENT_SCOREBOARD](scoreboard_data)
+            await self.on_event[self.EVENT_SCOREBOARD](scoreboard_data, list_id=self.list_id)
 
         # Connect to the scorebot URI.
         await sio.connect(self.socket_uri, transports="websocket")
