@@ -16,7 +16,6 @@ the information.
     - [RoundEnd](#RoundEnd)
     - [PlayerJoin](#PlayerJoin)
     - [PlayerQuit](#PlayerQuit)
-    - [MapChange](#MapChange)
     - [MatchStarted](#MatchStarted)
     - [Restart](#Restart)
     - [Suicide](#Suicide)
@@ -186,14 +185,6 @@ A player leaves the server.
   "playerSide": "TERRORIST",
   "playerNick": "Lekr0"
 }
-```
-
-#### MapChange
-
-The map is changed.
-
-```json
-TODO
 ```
 
 #### MatchStarted

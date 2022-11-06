@@ -29,7 +29,6 @@ class Livescore:
     EVENT_BOMB_DEFUSED = "BombDefused"
     EVENT_BOMB_PLANTED = "BombPlanted"
     EVENT_KILL = "Kill"
-    EVENT_MAP_CHANGE = "MapChange"
     EVENT_MATCH_STARTED = "MatchStarted"
     EVENT_PLAYER_JOIN = "PlayerJoin"
     EVENT_PLAYER_QUIT = "PlayerQuit"
@@ -66,7 +65,6 @@ class Livescore:
             self.EVENT_BOMB_DEFUSED: _noop,
             self.EVENT_BOMB_PLANTED: _noop,
             self.EVENT_KILL: _noop,
-            self.EVENT_MAP_CHANGE: _noop,
             self.EVENT_MATCH_STARTED: _noop,
             self.EVENT_PLAYER_JOIN: _noop,
             self.EVENT_PLAYER_QUIT: _noop,
